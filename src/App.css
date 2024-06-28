@@ -1,0 +1,35 @@
+.btn{
+    border: 2px solid white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: rgb(96, 22, 22);
+    color: white;
+    font-size:1.1rem;
+    font-weight: 500;
+}
+
+.btn:hover{
+    scale: 1.05;
+    background-color: rgb(77, 10, 10);
+    font-weight: 600;
+}
+
+.todo-input{
+    width: 250px;
+    padding: 5px 30px 5px 12px;
+    border: 2px solid white;
+    border-radius: 10px;
+    color: black;
+    font-size: 1.1rem;
+    font-weight: 400;
+}
+
+.todo-input:focus{
+    outline: none;
+}
+
+.icon{
+    position: relative;
+    right: 25px;
+}
