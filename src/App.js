@@ -3,17 +3,28 @@ import "./App.css";
 import todoImg from "./images/todoImg.png";
 
 function App() {
-  const [data, setData] = useState([{id:1233,name:"Harsh"},{id:1233,name:"Harsh"}]);
+  const [data, setData] = useState([
+    { id: 1233, name: "Harsh" },
+    { id: 1234, name: "Harsh" },
+  ]);
   const [inputData, setInputData] = useState("");
 
-  const addData = ()=>{
-    let obj = {id:new Date().getTime().toString(), name:inputData}
-    setData([...data,obj])
-    setInputData("")
-  }
+  const addData = () => {
+    let obj = { id: new Date().getTime().toString(), name: inputData };
+    setData([...data, obj]);
+    setInputData("");
+  };
 
-  const clearAllData = ()=>{
-    setData([])
+  const clearAllData = () => {
+    setData([]);
+  };
+
+  const removeItem = (id)=>{
+    let newData = data.filter((ele)=>{
+      return ele.id !== id;
+    })
+
+    setData(newData)
   }
 
   return (
@@ -30,7 +41,7 @@ function App() {
             className="todo-input"
             type="text"
             value={inputData}
-            onChange={(e)=>setInputData(e.target.value)}
+            onChange={(e) => setInputData(e.target.value)}
             placeholder="✍️ Add item..."
           />
           <i
@@ -40,14 +51,24 @@ function App() {
           ></i>
         </div>
         <div className="my-auto">
-          <button className="btn" onClick={clearAllData}>Remove All</button>
+          <button className="btn" onClick={clearAllData}>
+            Remove All
+          </button>
         </div>
       </div>
       <div className="px-20 py-10 flex gap-10">
-        {data.map((ele,index) => {
-          return <div className="todo-item">
-            <div>{index+1}{". "}{ele.name}</div>
-          </div>;
+        {data.map((ele, index) => {
+          return (
+            <div className="todo-item">
+              <div>
+                {index + 1}
+                {". "}
+                {ele.name}
+              </div>
+              <i className="fas fa-solid fa-trash"
+              onClick={()=>removeItem(ele.id)}></i>
+            </div>
+          );
         })}
       </div>
     </div>
