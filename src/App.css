@@ -33,3 +33,13 @@
     position: relative;
     right: 25px;
 }
+
+.todo-item{
+    background-color: rgb(15, 42, 42);
+    padding: 8px 15px;
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 500;
+    border: 2px solid white;
+    border-radius: 8px;
+}
