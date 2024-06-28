@@ -1,13 +1,23 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import todoImg from "./images/todoImg.png";
 
+const getLocalStorageData = () => {
+  let list = localStorage.getItem("lists");
+  if (list) {
+    return JSON.parse(localStorage.getItem("lists"));
+  } else {
+    return [];
+  }
+};
+
 function App() {
-  const [data, setData] = useState([
-    { id: 1233, name: "Harsh" },
-    { id: 1234, name: "Harsh" },
-  ]);
+  const [data, setData] = useState(getLocalStorageData());
   const [inputData, setInputData] = useState("");
+
+  useEffect(()=>{
+    localStorage.setItem("lits",JSON.stringify(data))
+  },[data])
 
   const addData = () => {
     let obj = { id: new Date().getTime().toString(), name: inputData };
@@ -19,13 +29,13 @@ function App() {
     setData([]);
   };
 
-  const removeItem = (id)=>{
-    let newData = data.filter((ele)=>{
+  const removeItem = (id) => {
+    let newData = data.filter((ele) => {
       return ele.id !== id;
-    })
+    });
 
-    setData(newData)
-  }
+    setData(newData);
+  };
 
   return (
     <div className="bg-slate-500 w-[100vw] h-[100vh] py-5">
@@ -56,7 +66,7 @@ function App() {
           </button>
         </div>
       </div>
-      <div className="px-20 py-10 flex gap-10">
+      <div className="px-20 py-10 flex flex-wrap gap-10">
         {data.map((ele, index) => {
           return (
             <div className="todo-item">
@@ -65,8 +75,10 @@ function App() {
                 {". "}
                 {ele.name}
               </div>
-              <i className="fas fa-solid fa-trash"
-              onClick={()=>removeItem(ele.id)}></i>
+              <i
+                className="fas fa-solid fa-trash"
+                onClick={() => removeItem(ele.id)}
+              ></i>
             </div>
           );
         })}
